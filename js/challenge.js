@@ -29,8 +29,8 @@ heartElement.addEventListener('click', () => {
 countPlus.addEventListener('click', increment);
 
 countMinus.addEventListener('click', () => {
-        let counterNum = parseInt((counterDisplay.textContent), 10);
-        counterDisplay.textContent = counterNum - 1;
+    let counterNum = parseInt((counterDisplay.textContent), 10);
+    counterDisplay.textContent = counterNum - 1;
 });
 
 function increment() {
@@ -38,56 +38,39 @@ function increment() {
     counterDisplay.textContent = counterNum + 1;
 }
 
-// countPlus.addEventListener('click', () => {
-//     increment(1);
-//     });
+const comment = document.getElementById('comment-form');
 
-// countMinus.addEventListener('click', () => {
-//     increment(-1);
-//     });
+comment.addEventListener("submit", e => {
+    e.preventDefault();
+    const input = e.target.comment.value;
+    const newReview = document.createElement('li');
+    
+    newReview.textContent = `${input}`;
+    
+    const commentContainer = document.getElementById('list');
+    commentContainer.appendChild(newReview);
+})
 
-// const increment = (e) => {
-//     count = counterNum + (e);
-//     updateDisplay();
-// }
-     
-function commentFun(){
-    const comment = document.getElementById('comment-form');
-    comment.addEventListener("submit", e => {
-        e.preventDefault();
-        const input = e.target.comment.value;
-        const newReview = document.createElement('li');
-        newReview.textContent = `${input}`;
-        const commentContainer = document.getElementById('list');
-        commentContainer.appendChild(newReview);
-    })
-}
-commentFun();
-
+let timerId = setInterval( () => {
+    increment();
+}, 1000);
 let paused = false;
-
 const pauseButton = document.getElementById('pause');
+
 pauseButton.addEventListener('click', () => {
     if(paused) {
         timerId = setInterval( () => {
-            increment(); // doesn't work until I rip the incrementer they built
+            increment();
         }, 1000)
+        pauseSwitch();
     } else {
-        const buttons = [countMinus, countPlus, heartElement]
-        buttons.forEach(button => button.disabled = true)
+        pauseSwitch();
         clearInterval( timerId)
     }
-
-    paused = // gotta 
-    
-    
-    stopInterval();
+    paused = !paused;
 })
 
-// let timerId = setInterval(() => {
-//     console.log('hello world');
-// }, 1000);
-
-function stopInterval () {
-    clearInterval(timerId);
+function pauseSwitch() {
+    const buttons = [countMinus, countPlus, heartElement]
+    buttons.forEach(button => button.disabled = !paused) 
 }
