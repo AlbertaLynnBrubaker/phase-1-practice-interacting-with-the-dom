@@ -6,12 +6,12 @@ const updateDisplay = () => counterDisplay.innerHTML = count;
 
 let count = 0;
 
-// updateDisplay();
+ //updateDisplay();
 
 countPlus.addEventListener('click', () => {
     count++;
     updateDisplay();
-    console.
+    console.log(count);
     });
 
 countMinus.addEventListener('click', () => {
